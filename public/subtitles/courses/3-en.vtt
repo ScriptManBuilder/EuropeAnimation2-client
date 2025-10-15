@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.000
+Welcome to Maya 3D Animation Course 3
+
+2
+00:00:03.500 --> 00:00:08.000
+In this lesson, we'll dive deeper into Maya's animation tools
+
+3
+00:00:08.500 --> 00:00:12.000
+I'm Lucas Ridley, and I'll be your instructor for this journey
+
+4
+00:00:12.500 --> 00:00:16.000
+We'll explore intermediate animation techniques
+
+5
+00:00:16.500 --> 00:00:20.000
+Including keyframe animation and timing principles
+
+6
+00:00:20.500 --> 00:00:24.000
+Let's start by opening Maya and setting up our workspace
+
+7
+00:00:24.500 --> 00:00:28.000
+First, we'll create a new scene for our animation project
+
+8
+00:00:28.500 --> 00:00:32.000
+Understanding the timeline is crucial for animation
+
+9
+00:00:32.500 --> 00:00:36.000
+We'll learn how to set keyframes effectively
+
+10
+00:00:36.500 --> 00:00:40.000
+Animation curves will help us control motion smoothly

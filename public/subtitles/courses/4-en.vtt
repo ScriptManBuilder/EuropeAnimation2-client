@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.000
+Welcome to Maya 3D Animation Course 4
+
+2
+00:00:03.500 --> 00:00:08.000
+Today we'll focus on character rigging fundamentals
+
+3
+00:00:08.500 --> 00:00:12.000
+I'm Lucas Ridley, your Maya animation instructor
+
+4
+00:00:12.500 --> 00:00:16.000
+Rigging is essential for character animation
+
+5
+00:00:16.500 --> 00:00:20.000
+We'll create a basic skeletal system for our character
+
+6
+00:00:20.500 --> 00:00:24.000
+Understanding joints and bones is our first step
+
+7
+00:00:24.500 --> 00:00:28.000
+We'll learn how to position joints correctly
+
+8
+00:00:28.500 --> 00:00:32.000
+Proper hierarchy is crucial for a good rig
+
+9
+00:00:32.500 --> 00:00:36.000
+Let's explore joint orientation and naming conventions
+
+10
+00:00:36.500 --> 00:00:40.000
+By the end, you'll have a functional character rig
