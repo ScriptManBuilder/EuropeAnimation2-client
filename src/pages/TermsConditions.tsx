@@ -60,7 +60,8 @@ const TermsConditions: React.FC = () => {
           Our contact information:
         </Paragraph>
         <Paragraph>
-          Company: {COMPANY_INFO.owner}<br/>
+          Company: {COMPANY_INFO.name}<br/>
+          Director: {COMPANY_INFO.director} ({COMPANY_INFO.directorRole})<br/>
           Email: {CONTACT_INFO.email}<br/>
           Phone: {CONTACT_INFO.phoneFormatted}<br/>
           Address: {COMPANY_INFO.address}
@@ -164,7 +165,7 @@ const TermsConditions: React.FC = () => {
         <SectionTitle>11. Governing Law</SectionTitle>
         <Paragraph>
           These terms and conditions are governed by and construed in accordance with 
-          the laws of the State of Wyoming, United States. Any disputes will be resolved in the courts of Wyoming.
+          the laws of England and Wales, United Kingdom. Any disputes will be resolved in the courts of England and Wales.
         </Paragraph>
       </Section>
 
@@ -174,8 +175,8 @@ const TermsConditions: React.FC = () => {
           For questions about these Terms & Conditions or course-related inquiries, please contact us at:
         </Paragraph>
         <Paragraph>
-       
-          Company: {COMPANY_INFO.owner}<br />
+          Company: {COMPANY_INFO.name}<br />
+          Director: {COMPANY_INFO.director} ({COMPANY_INFO.directorRole})<br />
           Address: {COMPANY_INFO.address}<br />
           Phone: {CONTACT_INFO.phoneFormatted}<br />
           Email: {CONTACT_INFO.email}<br />

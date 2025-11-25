@@ -7,10 +7,11 @@ export const CONTACT_INFO = {
 
 // Company Information Constants
 export const COMPANY_INFO = {
-  name: process.env.REACT_APP_COMPANY_NAME || 'Elariosso Digital',
+  name: process.env.REACT_APP_COMPANY_NAME || 'Optivest Ltd',
   websiteUrl: process.env.REACT_APP_WEBSITE_URL || 'animation-ecourses.com',
-  address: process.env.REACT_APP_COMPANY_ADDRESS || '1350 Tumbleweed Way, Sacramento, CA, USA, 95834',
-  owner: process.env.REACT_APP_COMPANY_OWNER || 'Elariosso Digital',
+  address: process.env.REACT_APP_COMPANY_ADDRESS || '6 Orchrd Pl, London, SW1H 0BF, UK',
+  director: process.env.REACT_APP_COMPANY_DIRECTOR || 'Petya Valkova',
+  directorRole: process.env.REACT_APP_COMPANY_DIRECTOR_ROLE || 'Director & UBO',
 } as const;
 
 // API Configuration

@@ -258,8 +258,8 @@ const PrivacyPolicy: React.FC = () => {
         </Paragraph>
         <Paragraph>
           <strong>{COMPANY_INFO.name}</strong><br/>
-          Company: {COMPANY_INFO.owner}<br/>
-          {COMPANY_INFO.address}<br/>
+          Director: {COMPANY_INFO.director} ({COMPANY_INFO.directorRole})<br/>
+          Address: {COMPANY_INFO.address}<br/>
           Email: {CONTACT_INFO.email}<br/>
           Phone: {CONTACT_INFO.phoneFormatted}
         </Paragraph>

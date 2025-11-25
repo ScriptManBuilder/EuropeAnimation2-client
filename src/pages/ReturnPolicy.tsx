@@ -166,8 +166,8 @@ const ReturnPolicy: React.FC = () => {
           For refund requests or questions about this policy:
         </Paragraph>
         <Paragraph>
-      
-          Company: {COMPANY_INFO.owner}<br/>
+          Company: {COMPANY_INFO.name}<br/>
+          Director: {COMPANY_INFO.director} ({COMPANY_INFO.directorRole})<br/>
           Email: {CONTACT_INFO.email}<br/>
           Phone: {CONTACT_INFO.phoneFormatted}<br/>
           Address: {COMPANY_INFO.address}<br/>

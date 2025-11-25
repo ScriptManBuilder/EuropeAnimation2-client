@@ -1245,6 +1245,95 @@ const TermsText = styled.span`
   }
 `;
 
+const PaymentMethodSelector = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+`;
+
+const PaymentMethodOption = styled.div<{ isSelected: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 2px solid ${props => props.isSelected ? '#3b82f6' : 'var(--minimal-gray-200)'};
+  border-radius: 12px;
+  background: ${props => props.isSelected ? 'rgba(59, 130, 246, 0.05)' : 'var(--minimal-white)'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+  }
+
+  ${props => props.isSelected && `
+    &::before {
+      content: '✓';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #3b82f6;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  `}
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+
+const PaymentMethodIcon = styled.img`
+  height: 40px;
+  margin-bottom: 12px;
+  object-fit: contain;
+
+  @media (max-width: 768px) {
+    height: 35px;
+    margin-bottom: 10px;
+  }
+`;
+
+const PaymentMethodLabel = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--minimal-text-primary);
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+`;
+
+const PaymentMethodDescription = styled.div`
+  font-size: 0.85rem;
+  color: var(--minimal-text-secondary);
+  text-align: center;
+  margin-top: 4px;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+`;
+
 const Checkout: React.FC = () => {
   const { state } = useCart();
   const { subscription, isMember, isOnTrial } = useMembership();
@@ -1279,6 +1368,7 @@ const Checkout: React.FC = () => {
   };
 
   const [captchaProblem, setCaptchaProblem] = useState(generateCaptcha());
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'sepa'>('card');
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -1291,7 +1381,10 @@ const Checkout: React.FC = () => {
     cardNumber: '',
     expiryDate: '',
     cvv: '',
-    nameOnCard: ''
+    nameOnCard: '',
+    iban: '',
+    accountHolderName: '',
+    bic: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaAnswer, setCaptchaAnswer] = useState<string>('');
@@ -1329,7 +1422,13 @@ const Checkout: React.FC = () => {
   };
 
   const validateForm = () => {
-    const required = ['email', 'firstName', 'lastName', 'country', 'cardNumber', 'expiryDate', 'cvv', 'nameOnCard'];
+    let required: string[];
+    
+    if (paymentMethod === 'card') {
+      required = ['email', 'firstName', 'lastName', 'country', 'cardNumber', 'expiryDate', 'cvv', 'nameOnCard'];
+    } else {
+      required = ['email', 'firstName', 'lastName', 'country', 'iban', 'accountHolderName'];
+    }
     
     for (const field of required) {
       if (!formData[field as keyof typeof formData]) {
@@ -1357,11 +1456,20 @@ const Checkout: React.FC = () => {
       return false;
     }
     
-    // Basic card number validation (remove spaces and check length)
-    const cardNumber = formData.cardNumber.replace(/\s/g, '');
-    if (cardNumber.length < 13 || cardNumber.length > 19) {
-      setPaymentError('Please enter a valid card number');
-      return false;
+    // Payment method specific validation
+    if (paymentMethod === 'card') {
+      const cardNumber = formData.cardNumber.replace(/\s/g, '');
+      if (cardNumber.length < 13 || cardNumber.length > 19) {
+        setPaymentError('Please enter a valid card number');
+        return false;
+      }
+    } else {
+      // Basic IBAN validation (length check)
+      const iban = formData.iban.replace(/\s/g, '');
+      if (iban.length < 15 || iban.length > 34) {
+        setPaymentError('Please enter a valid IBAN');
+        return false;
+      }
     }
     
     return true;
@@ -1384,6 +1492,7 @@ const Checkout: React.FC = () => {
       // Process order (no real charges)
       const orderData = {
         formData,
+        paymentMethod,
         captchaVerified: true,
         total,
         items: state.items,
@@ -1486,55 +1595,118 @@ const Checkout: React.FC = () => {
 
             <FormSection>
               <SectionTitle>Payment Information</SectionTitle>
-              <FormGroup>
-                <Label htmlFor="cardNumber">Card Number *</Label>
-                <Input
-                  type="text"
-                  id="cardNumber"
-                  name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  placeholder="1234 5678 9012 3456"
-                  required
-                />
-              </FormGroup>
-              <FormRow>
-                <FormGroup>
-                  <Label htmlFor="expiryDate">Expiry Date *</Label>
-                  <Input
-                    type="text"
-                    id="expiryDate"
-                    name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleInputChange}
-                    placeholder="MM/YY"
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label htmlFor="cvv">CVV *</Label>
-                  <Input
-                    type="text"
-                    id="cvv"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    placeholder="123"
-                    required
-                  />
-                </FormGroup>
-              </FormRow>
-              <FormGroup>
-                <Label htmlFor="nameOnCard">Name on Card *</Label>
-                <Input
-                  type="text"
-                  id="nameOnCard"
-                  name="nameOnCard"
-                  value={formData.nameOnCard}
-                  onChange={handleInputChange}
-                  required
-                />
-              </FormGroup>
+              
+              <PaymentMethodSelector>
+                <PaymentMethodOption 
+                  isSelected={paymentMethod === 'card'}
+                  onClick={() => setPaymentMethod('card')}
+                >
+                  <PaymentMethodIcon src="/images/credit-card-icon.png" alt="Credit Card" />
+                  <PaymentMethodLabel>Credit/Debit Card</PaymentMethodLabel>
+                  <PaymentMethodDescription>Pay with Visa, Mastercard, Amex</PaymentMethodDescription>
+                </PaymentMethodOption>
+                
+                <PaymentMethodOption 
+                  isSelected={paymentMethod === 'sepa'}
+                  onClick={() => setPaymentMethod('sepa')}
+                >
+                  <PaymentMethodIcon src="/images/sepa-logo.png" alt="SEPA" />
+                  <PaymentMethodLabel>SEPA Direct Debit</PaymentMethodLabel>
+                  <PaymentMethodDescription>European bank transfer</PaymentMethodDescription>
+                </PaymentMethodOption>
+              </PaymentMethodSelector>
+
+              {paymentMethod === 'card' ? (
+                <>
+                  <FormGroup>
+                    <Label htmlFor="cardNumber">Card Number *</Label>
+                    <Input
+                      type="text"
+                      id="cardNumber"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleInputChange}
+                      placeholder="1234 5678 9012 3456"
+                      required
+                    />
+                  </FormGroup>
+                  <FormRow>
+                    <FormGroup>
+                      <Label htmlFor="expiryDate">Expiry Date *</Label>
+                      <Input
+                        type="text"
+                        id="expiryDate"
+                        name="expiryDate"
+                        value={formData.expiryDate}
+                        onChange={handleInputChange}
+                        placeholder="MM/YY"
+                        required
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label htmlFor="cvv">CVV *</Label>
+                      <Input
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        value={formData.cvv}
+                        onChange={handleInputChange}
+                        placeholder="123"
+                        required
+                      />
+                    </FormGroup>
+                  </FormRow>
+                  <FormGroup>
+                    <Label htmlFor="nameOnCard">Name on Card *</Label>
+                    <Input
+                      type="text"
+                      id="nameOnCard"
+                      name="nameOnCard"
+                      value={formData.nameOnCard}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </FormGroup>
+                </>
+              ) : (
+                <>
+                  <FormGroup>
+                    <Label htmlFor="iban">IBAN *</Label>
+                    <Input
+                      type="text"
+                      id="iban"
+                      name="iban"
+                      value={formData.iban}
+                      onChange={handleInputChange}
+                      placeholder="DE89 3704 0044 0532 0130 00"
+                      required
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label htmlFor="accountHolderName">Account Holder Name *</Label>
+                    <Input
+                      type="text"
+                      id="accountHolderName"
+                      name="accountHolderName"
+                      value={formData.accountHolderName}
+                      onChange={handleInputChange}
+                      placeholder="Full name as shown on bank account"
+                      required
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label htmlFor="bic">BIC/SWIFT Code (Optional)</Label>
+                    <Input
+                      type="text"
+                      id="bic"
+                      name="bic"
+                      value={formData.bic}
+                      onChange={handleInputChange}
+                      placeholder="COBADEFFXXX"
+                    />
+                  </FormGroup>
+                </>
+              )}
             </FormSection>
 
             {hasPendingMembership && (
@@ -1577,7 +1749,7 @@ const Checkout: React.FC = () => {
                   💳 Payment Options
                 </NoticeTitle>
                 <NoticeText>
-                  Only credit/debit card payments are accepted. No multiple payment options available.
+                  We accept credit/debit cards (Visa, Mastercard, Amex) and SEPA Direct Debit for European customers.
                 </NoticeText>
               </NoticeSection>
             </CheckoutNotices>
