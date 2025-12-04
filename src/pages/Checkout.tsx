@@ -1718,7 +1718,7 @@ const Checkout: React.FC = () => {
                   </p>
                   
                   <MembershipBenefits>
-                    <MembershipBenefit>20% discount on all courses</MembershipBenefit>
+                    <MembershipBenefit>25% discount on all courses</MembershipBenefit>
                     <MembershipBenefit>Priority customer support</MembershipBenefit>
                     <MembershipBenefit>Exclusive member-only content</MembershipBenefit>
                     <MembershipBenefit>Early access to new courses</MembershipBenefit>
@@ -1727,9 +1727,21 @@ const Checkout: React.FC = () => {
                   </MembershipBenefits>
 
                   <MembershipPricing>
-                    <MembershipPrice>3-Day Free Trial → 19.99 €/month</MembershipPrice>
+                    <MembershipPrice>3-Day Free Trial → €19.99/month</MembershipPrice>
                     <MembershipTrial>Cancel anytime • No commitment required</MembershipTrial>
                   </MembershipPricing>
+
+                  <div style={{ marginTop: '20px', padding: '16px', background: 'rgba(255,255,255,0.95)', borderRadius: '12px', color: '#2d3748', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                    <strong style={{ display: 'block', marginBottom: '8px', color: '#1a202c' }}>📋 Subscription Details:</strong>
+                    <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
+                      <li>Membership automatically renews monthly at €19.99 unless cancelled</li>
+                      <li>You will be billed on a monthly basis starting after your 3-day free trial</li>
+                      <li>Cancel anytime through Account Settings or contact support at {CONTACT_INFO.email}</li>
+                      <li>Cancellation takes effect at the end of your current billing cycle</li>
+                      <li>No refunds for partial months - access continues until end of paid period</li>
+                      <li>Cancel during free trial to avoid any charges</li>
+                    </ul>
+                  </div>
                 </MembershipDetails>
               </MembershipSection>
             )}
@@ -1827,8 +1839,20 @@ const Checkout: React.FC = () => {
                   I agree to pay the total amount provided on the checkout page. Upon successful payment, I will receive instant access to all course materials. 
                   To request a refund, please contact our customer service team CST Mon-Fri (9am-6pm) at {CONTACT_INFO.phoneFormatted} or email {CONTACT_INFO.email} within 30 days of purchase. 
                   For guidelines on refunds please visit our <a href="/refund-policy">Refund Policy</a> page. 
-                  Your credit card will be billed with the following descriptor: ANIMATION.ECOURSES. This is how the 
-                  charge will appear on the cardholder's billing statement. Course access will be provided immediately after successful payment.
+                  <br/><br/>
+                  <strong>Billing Information:</strong> Your credit card will be billed with the descriptor: <strong>ANIMATION.ECOURSES</strong>. This is how the charge will appear on your cardholder's billing statement. 
+                  {hasPendingMembership && (
+                    <>
+                      <br/><br/>
+                      <strong>VIP Membership Billing:</strong> You will be billed €19.99 monthly unless the membership is cancelled. 
+                      The membership automatically renews on a monthly basis. You may cancel your membership at any time by visiting your Account page and selecting "Manage Subscription" or by contacting customer support at {CONTACT_INFO.email}. 
+                      Cancellations take effect at the end of the current billing cycle. You will continue to have access to VIP benefits until the end of your paid period. 
+                      No refunds will be provided for partial months. The 3-day free trial allows you to cancel before any charges occur. 
+                      For full details, see our <a href="/subscription-policy">Subscription & Cancellation Policy</a>.
+                    </>
+                  )}
+                  <br/><br/>
+                  Course access will be provided immediately after successful payment.
                 </TermsText>
               </CheckboxContainer>
             </TermsCheckbox>
@@ -1868,10 +1892,27 @@ const Checkout: React.FC = () => {
             )}
 
             {hasPendingMembership && (
-              <SummaryRow style={{ color: '#3b82f6' }}>
-                <span>✨ VIP Membership (3-day trial)</span>
-                <span>{formatPrice(membershipPrice)}</span>
-              </SummaryRow>
+              <>
+                <SummaryRow style={{ color: '#3b82f6' }}>
+                  <span>✨ VIP Membership (3-day trial)</span>
+                  <span>{formatPrice(membershipPrice)}</span>
+                </SummaryRow>
+                <div style={{ 
+                  background: '#eff6ff', 
+                  padding: '12px', 
+                  borderRadius: '8px', 
+                  margin: '12px 0',
+                  fontSize: '0.8rem',
+                  lineHeight: '1.5',
+                  color: '#1e40af',
+                  border: '1px solid #bfdbfe'
+                }}>
+                  <strong>📅 Membership Billing:</strong><br/>
+                  • €19.99/month after 3-day free trial<br/>
+                  • Renews monthly until cancelled<br/>
+                  • Cancel anytime in Account Settings
+                </div>
+              </>
             )}
 
             <TotalRow>

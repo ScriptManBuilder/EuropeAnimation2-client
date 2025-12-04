@@ -5,7 +5,7 @@ import { products } from '../data/products';
 import { usePrice } from '../hooks/usePrice';
 import { RocketIcon, LightningIcon, ShieldIcon, GlobeIcon, TargetIcon, DiamondIcon } from '../components/FeatureIcons';
 import LazyImage from '../components/LazyImage';
-import { COMPANY_INFO } from '../config/constants';
+import { COMPANY_INFO, MEMBERSHIP_CONFIG } from '../config/constants';
 import {
   HeroSection,
   HeroVideo,
@@ -61,7 +61,17 @@ import {
   InfoSubsection,
   InfoSubtitle,
   InfoText,
-  InfoHighlight
+  InfoHighlight,
+  SubscriptionHighlight,
+  SubscriptionCard,
+  SubscriptionBadge,
+  SubscriptionTitle,
+  SubscriptionPriceBlock,
+  PriceAmount,
+  PricePeriod,
+  SubscriptionFeatures,
+  Feature,
+  SubscriptionTerms
 } from '../styles/pages/HomeStyles';
 
 const Home: React.FC = () => {
@@ -371,6 +381,8 @@ const Home: React.FC = () => {
         </Container>
       </HeroSection>
 
+    
+
       <FeaturesSection>
         
         <Container>
@@ -647,9 +659,70 @@ const Home: React.FC = () => {
         </ScrollingTextBanner>
       </PhotoGallerySection>
 
+      {/* VIP Subscription Highlight Section */}
+      <SubscriptionHighlight>
+        <Container>
+          <SubscriptionCard>
+            <SubscriptionBadge>VIP MEMBERSHIP</SubscriptionBadge>
+            <SubscriptionTitle>Unlock Premium Animation Courses</SubscriptionTitle>
+            
+            <SubscriptionPriceBlock>
+              <PriceAmount>{formatPrice(MEMBERSHIP_CONFIG.vip.monthlyPrice)}</PriceAmount>
+              <PricePeriod>/month</PricePeriod>
+            </SubscriptionPriceBlock>
+            
+            <SubscriptionFeatures>
+              <Feature>✓ {MEMBERSHIP_CONFIG.vip.trialDays}-Day Free Trial</Feature>
+              <Feature>✓ {MEMBERSHIP_CONFIG.vip.discountPercentage}% Off All Courses</Feature>
+              <Feature>✓ Priority Support</Feature>
+              <Feature>✓ Cancel Anytime</Feature>
+            </SubscriptionFeatures>
+            
+            <SubscriptionTerms>
+              Monthly billing unless cancelled. Cancel anytime through Account Settings or contact support. 
+              No partial refunds. <a href="/subscription-policy">View full terms</a>
+            </SubscriptionTerms>
+            
+            <Button as={Link} to="/products" variant="primary">
+              Start Free Trial
+            </Button>
+          </SubscriptionCard>
+        </Container>
+      </SubscriptionHighlight>
       {/* Information Section */}
       <InfoSection>
         <InfoGrid>
+          <InfoBlock>
+            <InfoTitle>VIP Membership Subscription</InfoTitle>
+            <InfoDescription>
+              Join our exclusive VIP Membership program and unlock premium benefits. 
+              Get 25% off on all animation courses, priority support, and exclusive content.
+            </InfoDescription>
+            
+            <InfoSubsection>
+              <InfoSubtitle>Membership Details</InfoSubtitle>
+              <InfoText>
+                <InfoHighlight>3-Day Free Trial</InfoHighlight> - Try VIP Membership risk-free for 3 days.<br/>
+                <InfoHighlight>€19.99/month</InfoHighlight> after trial period.<br/>
+                Membership automatically renews monthly unless cancelled.<br/>
+                Cancel anytime during or after the trial period with no penalty.
+              </InfoText>
+            </InfoSubsection>
+
+            <InfoSubsection>
+              <InfoSubtitle>Cancellation Policy</InfoSubtitle>
+              <InfoText>
+                You will be billed <InfoHighlight>€19.99 monthly</InfoHighlight> unless you cancel your membership. 
+                You can cancel your VIP Membership at any time through your account settings. 
+                To cancel, visit your Account page and select "Manage Subscription" or contact customer support. 
+                Cancellations take effect at the end of your current billing cycle. 
+                No refunds for partial months. Access continues until the end of the paid period.
+                <br/><br/>
+                For complete details, please review our <a href="/subscription-policy" style={{ color: '#4A90E2', textDecoration: 'underline' }}>Subscription & Cancellation Policy</a>.
+              </InfoText>
+            </InfoSubsection>
+          </InfoBlock>
+
           <InfoBlock>
             <InfoTitle>Master Digital Animation</InfoTitle>
             <InfoDescription>

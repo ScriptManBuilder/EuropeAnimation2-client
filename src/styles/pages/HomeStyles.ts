@@ -240,6 +240,197 @@ export const HeroButtons = styled.div`
   }
 `;
 
+// VIP Subscription Highlight Section
+export const SubscriptionHighlight = styled.section`
+  padding: 80px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  @media (max-width: 768px) {
+    padding: 50px 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 0;
+  }
+`;
+
+export const SubscriptionCard = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 24px;
+  padding: 60px 50px;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+  
+  @media (max-width: 768px) {
+    padding: 40px 30px;
+    border-radius: 20px;
+    max-width: 90%;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 30px 20px;
+    border-radius: 16px;
+  }
+`;
+
+export const SubscriptionBadge = styled.div`
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    padding: 8px 20px;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    padding: 7px 18px;
+  }
+`;
+
+export const SubscriptionTitle = styled.h2`
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--minimal-black);
+  margin-bottom: 40px;
+  line-height: 1.2;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+  }
+`;
+
+export const SubscriptionPriceBlock = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  margin: 30px 0;
+  
+  @media (max-width: 480px) {
+    margin: 25px 0;
+  }
+`;
+
+export const PriceAmount = styled.span`
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: #667eea;
+  line-height: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 3.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2.8rem;
+  }
+`;
+
+export const PricePeriod = styled.span`
+  font-size: 1.6rem;
+  color: var(--minimal-gray);
+  font-weight: 500;
+  
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+`;
+
+export const SubscriptionFeatures = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 40px 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  @media (max-width: 768px) {
+    gap: 16px;
+    margin: 30px auto;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 25px auto;
+  }
+`;
+
+export const Feature = styled.div`
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--minimal-black);
+  text-align: left;
+  padding: 12px 0;
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    padding: 10px 0;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 8px 0;
+  }
+`;
+
+export const SubscriptionTerms = styled.p`
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 30px 0;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  a {
+    color: #667eea;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #764ba2;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.88rem;
+    margin: 25px 0;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.82rem;
+    margin: 20px 0;
+    line-height: 1.5;
+  }
+`;
+
 export const FeaturesSection = styled.section`
   padding: 40px 0;
   background: var(--minimal-light-gray);

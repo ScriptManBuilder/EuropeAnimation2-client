@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { authAPI, User as ApiUser, SignupData, SigninData } from '../services/api';
 
 interface User {
   id: string;
@@ -21,42 +20,36 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Преобразование пользователя из API в формат приложения
-const transformApiUser = (apiUser: ApiUser): User => ({
-  id: apiUser.id.toString(),
-  email: apiUser.email,
-  firstName: apiUser.firstName || '',
-  lastName: apiUser.lastName || ''
-});
+// Статическая аутентификация - данные тестового пользователя из .env
+const STATIC_TEST_USER = {
+  email: process.env.REACT_APP_TEST_USER_EMAIL || 'test@test.com',
+  password: process.env.REACT_APP_TEST_USER_PASSWORD || '12345',
+  firstName: process.env.REACT_APP_TEST_USER_FIRSTNAME || 'Test',
+  lastName: process.env.REACT_APP_TEST_USER_LASTNAME || 'User'
+};
+
+// Ключ для localStorage
+const AUTH_STORAGE_KEY = 'static_auth_user';
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Инициализация - проверка сохраненного пользователя
   useEffect(() => {
-    const initAuth = async () => {
+    const initAuth = () => {
       setLoading(true);
-      setError(null);
       
       try {
-        if (authAPI.isAuthenticated()) {
-          const profileData = await authAPI.getProfile();
-          const transformedUser = transformApiUser(profileData.user);
-          setUser(transformedUser);
+        const storedUser = localStorage.getItem(AUTH_STORAGE_KEY);
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          setUser(parsedUser);
         }
       } catch (err) {
-        
-        // Проверяем тип ошибки для лучшей обработки
-        if (err instanceof Error && err.message.includes('Failed to fetch')) {
-          setError('Backend connection failed. Some features may be limited.');
-        } else {
-          setError('Authentication failed');
-        }
-        
-        // Если токен невалиден, очищаем его
-        authAPI.signout();
-        setUser(null);
+        console.error('Failed to load user from storage:', err);
+        localStorage.removeItem(AUTH_STORAGE_KEY);
       } finally {
         setLoading(false);
       }
@@ -65,53 +58,70 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     initAuth();
   }, []);
 
+  // Статический логин - проверка credentials
   const login = async (email: string, password: string): Promise<boolean> => {
     setLoading(true);
     setError(null);
     
+    // Имитация задержки сети
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
     try {
-      const credentials: SigninData = { email, password };
-      const response = await authAPI.signin(credentials);
-      
-      const transformedUser = transformApiUser(response.user);
-      
-      setUser(transformedUser);
-      setLoading(false);
-      return true;
+      // Проверка credentials с тестовым пользователем
+      if (email === STATIC_TEST_USER.email && password === STATIC_TEST_USER.password) {
+        const loggedInUser: User = {
+          id: '1',
+          email: STATIC_TEST_USER.email,
+          firstName: STATIC_TEST_USER.firstName,
+          lastName: STATIC_TEST_USER.lastName
+        };
+        
+        setUser(loggedInUser);
+        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(loggedInUser));
+        setLoading(false);
+        return true;
+      } else {
+        setError('Invalid email or password');
+        setLoading(false);
+        return false;
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError('Login failed');
       setLoading(false);
       return false;
     }
   };
 
+  // Статическая регистрация - только для тестового пользователя
   const register = async (userData: { email: string; password: string; firstName: string; lastName: string; }): Promise<boolean> => {
     setLoading(true);
     setError(null);
     
+    // Имитация задержки сети
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
     try {
-      const signupData: SignupData = {
+      // В статическом режиме регистрация создает любого пользователя, но курсы доступны только test@test.com
+      const registeredUser: User = {
+        id: Date.now().toString(),
         email: userData.email,
-        password: userData.password,
         firstName: userData.firstName,
         lastName: userData.lastName
       };
       
-      const response = await authAPI.signup(signupData);
-      const transformedUser = transformApiUser(response.user);
-      
-      setUser(transformedUser);
+      setUser(registeredUser);
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(registeredUser));
       setLoading(false);
       return true;
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Registration failed');
+      setError('Registration failed');
       setLoading(false);
       return false;
     }
   };
 
   const logout = () => {
-    authAPI.signout();
+    localStorage.removeItem(AUTH_STORAGE_KEY);
     setUser(null);
     setError(null);
   };

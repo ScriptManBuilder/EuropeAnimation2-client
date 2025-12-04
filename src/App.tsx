@@ -29,6 +29,7 @@ const TermsConditions = React.lazy(() => import('./pages/TermsConditions'));
 const RefundPolicy = React.lazy(() => import('./pages/RefundPolicy'));
 const ReturnPolicy = React.lazy(() => import('./pages/ReturnPolicy'));
 const ShippingPolicy = React.lazy(() => import('./pages/ShippingPolicy'));
+const SubscriptionPolicy = React.lazy(() => import('./pages/SubscriptionPolicy'));
 const LazyAbout = React.lazy(() => import('./pages/About'));
 const LazyBlog = React.lazy(() => import('./pages/Blog'));
 
@@ -111,6 +112,7 @@ function AppContent() {
                   <Route path="/refund-policy" element={<RefundPolicy />} />
                   <Route path="/return-policy" element={<ReturnPolicy />} />
                   <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                  <Route path="/subscription-policy" element={<SubscriptionPolicy />} />
                   <Route path="/about" element={<LazyAbout />} />
                   <Route path="/blog" element={<LazyBlog />} />
                 </Routes>

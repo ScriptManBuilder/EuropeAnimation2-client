@@ -305,6 +305,14 @@ export const VipMembershipUpsell: React.FC<VipMembershipUpsellProps> = ({
           <RegularPriceText>Then just {monthlyPrice}/month</RegularPriceText>
           <RegularPriceText>Cancel anytime</RegularPriceText>
         </PriceRow>
+        <div style={{ marginTop: '16px', padding: '12px', background: 'rgba(255,255,255,0.1)', borderRadius: '8px', fontSize: '0.85rem', lineHeight: '1.6' }}>
+          <strong>Subscription Terms:</strong><br/>
+          • You will be billed {monthlyPrice} monthly unless cancelled<br/>
+          • Cancel anytime through Account Settings → Manage Subscription<br/>
+          • Cancellation takes effect at end of current billing cycle<br/>
+          • No refunds for partial months<br/>
+          • Access continues until end of paid period after cancellation
+        </div>
       </OfferBox>
 
       <SavingsHighlight show={!!potentialSavings}>
