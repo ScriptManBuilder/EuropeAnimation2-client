@@ -245,9 +245,9 @@ const PrivacyPolicy: React.FC = () => {
       <Section>
         <SectionTitle>International Users</SectionTitle>
         <Paragraph>
-          If you are outside the U.S., please note that your personal data may be transferred to and 
-          processed in the United States. We take appropriate steps to ensure that your information is 
-          protected according to relevant laws.
+          Our services are operated from the United Kingdom. Your personal data is processed and stored 
+          in accordance with UK and EU data protection laws (GDPR). We take appropriate steps to ensure 
+          that your information is protected according to these regulations.
         </Paragraph>
       </Section>
 

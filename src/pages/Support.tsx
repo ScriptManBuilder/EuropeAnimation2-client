@@ -69,7 +69,7 @@ const Support: React.FC = () => {
           <HeroContent>
             <HeroTitle>Student Support</HeroTitle>
             <HeroSubtitle>
-              We're here to help you succeed. Get expert assistance with your AI learning journey from our dedicated support team.
+              We're here to help you succeed. Get expert assistance with your learning journey from our dedicated support team.
             </HeroSubtitle>
           </HeroContent>
         </Container>
@@ -78,7 +78,7 @@ const Support: React.FC = () => {
       <Container>
         <SupportContent>
           <ContactSection>
-            <SectionTitle>Get in Touch</SectionTitle>
+            <SectionTitle style={{ textAlign: 'center' }}>Get in Touch</SectionTitle>
             <ContactMethodsGrid>
               <ContactCard>
                 <ContactIcon>

@@ -182,10 +182,64 @@ export const FooterBottom = styled.div`
 export const Copyright = styled.p`
   color: #6b7280;
   font-size: 0.9rem;
-  margin: 0;
+  margin: 0 0 20px 0;
   font-weight: 500;
   
   @media (max-width: 768px) {
     font-size: 0.85rem;
+    margin: 0 0 15px 0;
+  }
+`;
+
+export const PaymentMethods = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
+`;
+
+export const PaymentTitle = styled.span`
+  color: #6b7280;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const PaymentLogos = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  
+  @media (max-width: 768px) {
+    gap: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 12px;
+  }
+`;
+
+export const PaymentLogo = styled.img`
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  filter: none;
+  
+  @media (max-width: 768px) {
+    height: 28px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 24px;
   }
 `;

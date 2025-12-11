@@ -11,7 +11,11 @@ import {
   PromoCard,
   PromoCardContent,
   FooterBottom,
-  Copyright
+  Copyright,
+  PaymentMethods,
+  PaymentTitle,
+  PaymentLogos,
+  PaymentLogo
 } from '../styles/components/FooterStyles';
 
 const Footer: React.FC = () => {
@@ -85,6 +89,14 @@ const Footer: React.FC = () => {
           <Copyright>
             Copyright © 2025 {COMPANY_INFO.name}. All rights reserved. | Premium Animation Education & Training Courses
           </Copyright>
+          <PaymentMethods>
+            <PaymentTitle>We Accept:</PaymentTitle>
+            <PaymentLogos>
+              <PaymentLogo src="/images/visa.svg" alt="Visa" />
+              <PaymentLogo src="/images/mastercard.svg" alt="Mastercard" />
+              <PaymentLogo src="/images/sepa-logo.png" alt="SEPA Direct Debit" />
+            </PaymentLogos>
+          </PaymentMethods>
         </FooterBottom>
       </FooterContent>
     </FooterWrapper>

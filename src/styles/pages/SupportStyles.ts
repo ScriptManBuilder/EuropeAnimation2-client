@@ -258,10 +258,17 @@ export const ContactLink = styled.a`
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  word-break: break-all;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: block;
+  max-width: 100%;
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
   
   @media (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
   
   &:hover {
@@ -274,10 +281,17 @@ export const ContactText = styled.span`
   color: #667eea;
   font-weight: 600;
   font-size: 1.1rem;
-  word-break: break-all;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: block;
+  max-width: 100%;
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
   
   @media (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 `;
 
