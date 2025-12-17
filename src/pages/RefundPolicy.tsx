@@ -111,7 +111,7 @@ const RefundPolicy: React.FC = () => {
         <SectionTitle>5. Refund Processing and Timeline</SectionTitle>
         <Paragraph>
           Approved refunds will be processed to your original payment method within 5-10 business days. 
-          You will see "ANIMATION COURSES" or "ANIMATION.ECOURSES" as the refund descriptor on your statement.
+          You will see "euro-tin.com" as the refund descriptor on your statement.
         </Paragraph>
         <Paragraph>
           Processing times may vary depending on your bank or credit card company. International customers 

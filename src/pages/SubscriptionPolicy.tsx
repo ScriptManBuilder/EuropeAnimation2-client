@@ -85,7 +85,7 @@ const SubscriptionPolicy: React.FC = () => {
         </Paragraph>
         <Paragraph>
           <strong>Monthly Billing:</strong> You will be charged {membershipPrice} per month. The charge will 
-          appear on your credit card statement as "ANIMATION.ECOURSES".
+          appear on your credit card statement as "euro-tin.com".
         </Paragraph>
         <Paragraph>
           <strong>Free Trial Period:</strong> New members receive a {MEMBERSHIP_CONFIG.vip.trialDays}-day free trial. 
@@ -193,7 +193,7 @@ const SubscriptionPolicy: React.FC = () => {
           5. We will investigate and respond within 24-48 hours
         </Paragraph>
         <Paragraph>
-          <strong>Billing Descriptor:</strong> Charges appear on your statement as "ANIMATION.ECOURSES".
+          <strong>Billing Descriptor:</strong> Charges appear on your statement as "euro-tin.com".
         </Paragraph>
       </Section>
 
